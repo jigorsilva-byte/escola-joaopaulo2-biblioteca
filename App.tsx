@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
-import Dashboard from './components/Dashboard';
-import Loans from './components/Loans';
-import Books from './components/Books';
-import Users from './components/Users';
-import Settings from './components/Settings';
-import Reports from './components/Reports';
-import Profile from './components/Profile';
-import Classes from './components/Classes';
-import DigitalAssets from './components/DigitalAssets';
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const Loans = lazy(() => import('./components/Loans'));
+const Books = lazy(() => import('./components/Books'));
+const Users = lazy(() => import('./components/Users'));
+const Settings = lazy(() => import('./components/Settings'));
+const Reports = lazy(() => import('./components/Reports'));
+const Profile = lazy(() => import('./components/Profile'));
+const Classes = lazy(() => import('./components/Classes'));
+const DigitalAssets = lazy(() => import('./components/DigitalAssets'));
 import Login from './components/Login';
 import * as Storage from './services/storage';
 import { User, Book, Loan, DigitalAsset, BookFormat, ClassSector, AppSettings } from './types';
@@ -173,7 +173,11 @@ const App: React.FC = () => {
           onLogout={handleLogout}
         />
 
-        <main className="mt-16 p-4 md:p-8 flex-1 overflow-auto">{renderContent()}</main>
+        <main className="mt-16 p-4 md:p-8 flex-1 overflow-auto">
+          <Suspense fallback={<div className="p-8 text-center">Carregando...</div>}>
+            {renderContent()}
+          </Suspense>
+        </main>
       </div>
     </div>
   );
