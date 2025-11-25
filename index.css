@@ -1,0 +1,18 @@
+/* Minimal global styles
+   Tailwind is loaded via CDN in index.html; this file ensures the path exists
+   and provides a few small base rules used by the app. */
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Small utility to make scrollbars nicer in non-WebKit browsers */
+* {
+  box-sizing: border-box;
+}
