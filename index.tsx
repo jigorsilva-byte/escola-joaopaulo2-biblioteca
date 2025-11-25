@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Debug logging
 console.log('index.tsx loaded');
@@ -10,18 +11,21 @@ console.log('Root element:', rootElement);
 
 if (!rootElement) {
   console.error('Root element not found!');
-  document.body.innerHTML = '<h1 style="color:red;padding:20px;">ERRO: Elemento raiz não encontrado</h1>';
+  document.body.innerHTML =
+    '<h1 style="color:red;padding:20px;">ERRO: Elemento raiz não encontrado</h1>';
   throw new Error('Could not find root element to mount to');
 }
 
 try {
   console.log('Creating React root...');
   const root = ReactDOM.createRoot(rootElement);
-  
+
   console.log('Rendering App component...');
   root.render(
     <React.StrictMode>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </React.StrictMode>
   );
   console.log('App rendered successfully');
