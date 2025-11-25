@@ -17,6 +17,13 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "index.tsx",
+    "App.tsx",
+    "types.ts",
+    "components/**/*",
+    "services/**/*"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

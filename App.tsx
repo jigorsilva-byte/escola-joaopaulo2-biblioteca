@@ -13,7 +13,7 @@ import Classes from './components/Classes';
 import DigitalAssets from './components/DigitalAssets';
 import Login from './components/Login';
 import * as Storage from './services/storage';
-import { User, UserRole } from './types';
+import { User, UserRole, Book, Loan, DigitalAsset, BookFormat, ClassSector, AppSettings } from './types';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,25 +22,25 @@ const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   // Data State
-  const [users, setUsers] = useState(Storage.getCollection('users', []));
-  const [books, setBooks] = useState(Storage.getCollection('books', []));
-  const [loans, setLoans] = useState(Storage.getCollection('loans', []));
-  const [classes, setClasses] = useState(Storage.getCollection('classes', []));
-  const [assets, setAssets] = useState(Storage.getCollection('assets', []));
-  const [formats, setFormats] = useState(Storage.getCollection('formats', []));
-  const [settings, setAppSettings] = useState(Storage.getSettings());
+  const [users, setUsers] = useState<User[]>(Storage.getCollection<User>('users', []));
+  const [books, setBooks] = useState<Book[]>(Storage.getCollection<Book>('books', []));
+  const [loans, setLoans] = useState<Loan[]>(Storage.getCollection<Loan>('loans', []));
+  const [classes, setClasses] = useState<ClassSector[]>(Storage.getCollection<ClassSector>('classes', []));
+  const [assets, setAssets] = useState<DigitalAsset[]>(Storage.getCollection<DigitalAsset>('assets', []));
+  const [formats, setFormats] = useState<BookFormat[]>(Storage.getCollection<BookFormat>('formats', []));
+  const [settings, setAppSettings] = useState<AppSettings>(Storage.getSettings());
 
   useEffect(() => {
     Storage.loadInitialData();
     // Check for alerts and generate system notifications
     Storage.checkAndGenerateNotifications();
 
-    setUsers(Storage.getCollection('users', []));
-    setBooks(Storage.getCollection('books', []));
-    setLoans(Storage.getCollection('loans', []));
-    setClasses(Storage.getCollection('classes', []));
-    setAssets(Storage.getCollection('assets', []));
-    setFormats(Storage.getCollection('formats', []));
+    setUsers(Storage.getCollection<User>('users', []));
+    setBooks(Storage.getCollection<Book>('books', []));
+    setLoans(Storage.getCollection<Loan>('loans', []));
+    setClasses(Storage.getCollection<ClassSector>('classes', []));
+    setAssets(Storage.getCollection<DigitalAsset>('assets', []));
+    setFormats(Storage.getCollection<BookFormat>('formats', []));
     setAppSettings(Storage.getSettings());
   }, []);
 
@@ -123,7 +123,7 @@ const App: React.FC = () => {
                         const updated = { ...u, mustChangePassword: false };
                         setCurrentUser(updated);
                         // Also update in users list logic handled inside Profile but state needs sync
-                        const usersList = Storage.getCollection('users', []);
+                        const usersList = Storage.getCollection<User>('users', []);
                         const newUsersList = usersList.map(usr => usr.id === u.id ? updated : usr);
                         Storage.saveCollection('users', newUsersList);
                         setUsers(newUsersList);

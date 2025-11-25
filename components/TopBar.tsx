@@ -14,7 +14,7 @@ interface TopBarProps {
 const TopBar: React.FC<TopBarProps> = ({ settings, user, onToggleSidebar, onLogout }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>(Storage.getCollection('notifications', []));
+    const [notifications, setNotifications] = useState<Notification[]>(Storage.getCollection<Notification>('notifications', []));
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
