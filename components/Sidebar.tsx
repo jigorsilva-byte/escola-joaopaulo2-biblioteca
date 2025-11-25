@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Home, Users, BookOpen, FileText, Settings, ChevronDown, ChevronRight, LogOut, X } from 'lucide-react';
+import {
+  Home,
+  Users,
+  BookOpen,
+  FileText,
+  Settings,
+  ChevronDown,
+  ChevronRight,
+  LogOut,
+  X,
+} from 'lucide-react';
 
 interface SidebarProps {
   user: any;
@@ -10,10 +20,17 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ user, onChangePage, currentPage, onLogout, isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  user,
+  onChangePage,
+  currentPage,
+  onLogout,
+  isOpen,
+  onClose,
+}) => {
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({
-    'home': true,
-    'cadastros': true
+    home: true,
+    cadastros: true,
   });
 
   const toggleMenu = (menu: string) => {
@@ -29,7 +46,17 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onChangePage, currentPage, onLo
     }
   };
 
-  const MenuItem = ({ id, label, icon: Icon, subItems = [] }: { id: string, label: string, icon: any, subItems?: { id: string, label: string }[] }) => {
+  const MenuItem = ({
+    id,
+    label,
+    icon: Icon,
+    subItems = [],
+  }: {
+    id: string;
+    label: string;
+    icon: any;
+    subItems?: { id: string; label: string }[];
+  }) => {
     const hasSub = subItems.length > 0;
     const isExpanded = expandedMenus[id];
     const isActive = currentPage === id || subItems.some(sub => sub.id === currentPage);
@@ -70,22 +97,28 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onChangePage, currentPage, onLo
     <>
       {/* Mobile Overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
           onClick={onClose}
         ></div>
       )}
 
-      <aside className={`
+      <aside
+        className={`
         fixed top-0 left-0 z-40 h-screen w-64 bg-sidebar text-gray-100 overflow-y-auto shadow-xl flex flex-col transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0
-      `}>
+      `}
+      >
         {/* Profile Header */}
         <div className="p-6 border-b border-gray-700 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary bg-gray-600">
-              <img src={user.photoUrl || "https://picsum.photos/200"} alt="User" className="w-full h-full object-cover" />
+              <img
+                src={user.photoUrl || 'https://picsum.photos/200'}
+                alt="User"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <p className="text-xs text-gray-400">Bem-vindo(a),</p>
@@ -100,26 +133,26 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onChangePage, currentPage, onLo
         <div className="p-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Menu</div>
 
         <ul className="flex-1">
-          <MenuItem 
-            id="home" 
-            label="Home" 
-            icon={Home} 
+          <MenuItem
+            id="home"
+            label="Home"
+            icon={Home}
             subItems={[
               { id: 'dashboard', label: 'Painel Principal' },
-              { id: 'profile', label: 'Perfil' }
-            ]} 
+              { id: 'profile', label: 'Perfil' },
+            ]}
           />
-          
-          <MenuItem 
-            id="cadastros" 
-            label="Cadastros" 
-            icon={Users} 
+
+          <MenuItem
+            id="cadastros"
+            label="Cadastros"
+            icon={Users}
             subItems={[
               { id: 'classes', label: 'Setor/Turma' },
               { id: 'users', label: 'Usuários' },
               { id: 'books', label: 'Acervos' },
               { id: 'digital', label: 'Acervos Digitais' },
-            ]} 
+            ]}
           />
 
           <MenuItem id="loans" label="Empréstimos" icon={BookOpen} />
@@ -128,7 +161,10 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onChangePage, currentPage, onLo
         </ul>
 
         <div className="p-4 border-t border-gray-700">
-          <button onClick={onLogout} className="flex items-center text-red-400 hover:text-red-300 transition-colors w-full">
+          <button
+            onClick={onLogout}
+            className="flex items-center text-red-400 hover:text-red-300 transition-colors w-full"
+          >
             <LogOut size={18} className="mr-3" />
             <span>Sair do Sistema</span>
           </button>
