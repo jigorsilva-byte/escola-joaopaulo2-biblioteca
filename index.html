@@ -4,60 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bibliotecário Escolar 3.0</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              sidebar: '#2c3e50',
-              sidebarHover: '#34495e',
-              primary: '#1abc9c',
-              primaryDark: '#16a085',
-              secondary: '#2980b9',
-              danger: '#e74c3c',
-              warning: '#f39c12',
-            }
-          }
-        }
-      }
-    </script>
-    <style>
-      /* Custom scrollbar for sidebar */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #888; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-      }
-      .animate-fade-in {
-        animation: fadeIn 0.3s ease-in-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      /* Print specific styles */
-      @media print {
-        @page { margin: 0.5cm; }
-        body { -webkit-print-color-adjust: exact; }
-        .no-print { display: none !important; }
-      }
-    </style>
-  <!-- importmap removed: use local dependencies from package.json (Vite handles module resolution) -->
-<link rel="stylesheet" href="/index.css">
-</head>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
   <body class="bg-gray-100 text-gray-800 font-sans">
     <div id="root"></div>
-    <!-- Entrada do app -->
     <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>
